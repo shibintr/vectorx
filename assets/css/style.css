@@ -682,3 +682,10 @@ body.is-ready .anim-in { animation: vx-rise 1s var(--vx-ease) forwards; animatio
 .contact-card > div { overflow-wrap: normal; }
 .contact-card a.contact-link { overflow-wrap: anywhere; }
 @media (min-width: 1200px) { .contact-card a.contact-link { font-size: 0.98rem; overflow-wrap: normal; white-space: nowrap; } }
+
+/* Full vision statement */
+.vision-card { width: 100%; }
+.vision-card .statement { margin-bottom: 1.1rem; }
+.vision-card p:not(.statement):not(.vision-tagline) { margin-bottom: 0.9rem; }
+.vision-tagline { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid rgba(255,255,255,0.12); font-family: var(--vx-font-head); font-weight: 600; color: #fff; }
+@media (min-width: 992px) { .check-list.mission-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2.5rem; } }
