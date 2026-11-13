@@ -1,0 +1,7 @@
+# robots.txt — VectorX
+User-agent: *
+Allow: /
+Disallow: /theme.pdf
+Disallow: /site-contents%20.docx
+
+Sitemap: https://vectorx.live/sitemap.xml
