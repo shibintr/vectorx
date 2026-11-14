@@ -661,6 +661,23 @@ body.is-ready .anim-in { animation: vx-rise 1s var(--vx-ease) forwards; animatio
   .hv-tag i { font-size: 1rem; }
 }
 
+/* ---------- Hero visual: segment orbit ---------- */
+.orbit { width: min(440px, 100%); aspect-ratio: 1; }
+.orbit__ring { position: absolute; border-radius: 50%; inset: var(--in); box-shadow: inset 0 0 0 1px var(--vx-line); }
+.orbit__ring--dash { box-shadow: none; border: 1px dashed rgba(7, 217, 180, 0.28); animation: vx-spin 60s linear infinite; }
+.orbit__glow { position: absolute; inset: 22%; border-radius: 50%; background: radial-gradient(circle, rgba(7, 217, 180, 0.22), transparent 70%); filter: blur(10px); }
+.orbit__core { position: absolute; inset: 33%; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(160deg, rgba(15, 39, 64, 0.9), rgba(1, 17, 34, 0.85)); box-shadow: inset 0 0 0 1px var(--vx-line-strong), 0 0 60px rgba(0, 168, 248, 0.25); }
+.orbit__core img { width: 52%; height: auto; }
+.orbit__spin { position: absolute; inset: 6%; animation: vx-spin 40s linear infinite; }
+.orbit__node { --r: 136px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(var(--a)) translateY(calc(-1 * var(--r))) rotate(calc(-1 * var(--a))); }
+.orbit__node span { display: flex; align-items: center; gap: 0.45rem; white-space: nowrap; padding: 0.5rem 0.8rem; border-radius: 12px; background: rgba(1, 17, 34, 0.9); box-shadow: inset 0 0 0 1px var(--vx-line-strong), 0 10px 28px rgba(0, 0, 0, 0.45); font-size: 0.8rem; font-weight: 600; color: #fff; animation: vx-spin 40s linear infinite reverse; }
+.orbit__node i { color: var(--vx-green); }
+@media (max-width: 991.98px) { .orbit { margin: 3.5rem auto 0; } }
+@media (max-width: 575.98px) {
+  .orbit__node { --r: 110px; }
+  .orbit__node span { font-size: 0.7rem; padding: 0.4rem 0.6rem; }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

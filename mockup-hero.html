@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hero Visual Mockup</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Sora:wght@500;600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* ---------- mockup switcher (not part of final site) ---------- */
+    .mk-switch { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 50; display: flex; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(1,17,34,.92); box-shadow: inset 0 0 0 1px var(--vx-line-strong), 0 10px 30px rgba(0,0,0,.5); }
+    .mk-switch button { border: 0; background: transparent; color: var(--vx-muted); font: 600 .85rem var(--vx-font-head); padding: .5rem 1rem; border-radius: 999px; }
+    .mk-switch button.on { background: var(--vx-grad); color: #00121f; }
+    .mk-opt { display: none; }
+    .mk-opt.on { display: block; }
+    .hero { padding-top: 7rem; }
+
+    /* ---------- OPTION A: Segment orbit ---------- */
+    .orbit { position: relative; width: min(440px, 100%); aspect-ratio: 1; margin-left: auto; }
+    .orbit__ring { position: absolute; border-radius: 50%; inset: var(--in); box-shadow: inset 0 0 0 1px var(--vx-line); }
+    .orbit__ring--dash { box-shadow: none; border: 1px dashed rgba(7,217,180,.28); animation: vx-spin 60s linear infinite; }
+    .orbit__glow { position: absolute; inset: 22%; border-radius: 50%; background: radial-gradient(circle, rgba(7,217,180,.22), transparent 70%); filter: blur(10px); }
+    .orbit__core { position: absolute; inset: 33%; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(160deg, rgba(15,39,64,.9), rgba(1,17,34,.85)); box-shadow: inset 0 0 0 1px var(--vx-line-strong), 0 0 60px rgba(0,168,248,.25); }
+    .orbit__core img { width: 52%; height: auto; }
+    .orbit__spin { position: absolute; inset: 6%; animation: vx-spin 40s linear infinite; }
+    .orbit__node { position: absolute; left: 50%; top: 50%; transform: rotate(var(--a)) translateY(-50%) translateY(-136px) rotate(calc(-1 * var(--a))); }
+    .orbit__node span { display: flex; align-items: center; gap: .45rem; white-space: nowrap; transform: translate(-50%, -50%); padding: .5rem .8rem; border-radius: 12px; background: rgba(1,17,34,.9); box-shadow: inset 0 0 0 1px var(--vx-line-strong), 0 10px 28px rgba(0,0,0,.45); font-size: .8rem; font-weight: 600; color: #fff; animation: vx-spin 40s linear infinite reverse; }
+    .orbit__node i { color: var(--vx-green); }
+    @media (max-width: 575px) { .orbit__node { transform: rotate(var(--a)) translateY(-50%) translateY(-110px) rotate(calc(-1 * var(--a))); } .orbit__node span { font-size: .7rem; padding: .4rem .6rem; } }
+
+    /* ---------- OPTION B: Learning pathway ---------- */
+    .path-card .hv-head { margin-bottom: 1.4rem; }
+    .path { list-style: none; margin: 0; padding: 0; position: relative; }
+    .path::before { content: ""; position: absolute; left: 21px; top: 20px; bottom: 20px; width: 2px; background: var(--vx-line); }
+    .path::after { content: ""; position: absolute; left: 21px; top: 20px; width: 2px; height: 0; background: var(--vx-grad); background: linear-gradient(180deg, var(--vx-blue), var(--vx-green)); animation: mk-grow 2.4s 1s var(--vx-ease) forwards; }
+    @keyframes mk-grow { to { height: calc(100% - 40px); } }
+    .path li { position: relative; display: flex; gap: 1rem; align-items: flex-start; padding: .75rem 0; opacity: 0; animation: vx-rise .8s var(--vx-ease) forwards; animation-delay: calc(var(--i) * 180ms + 900ms); transform: translateY(12px); }
+    .path__dot { flex: none; width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; z-index: 1; background: #031a30; box-shadow: inset 0 0 0 1px var(--vx-line-strong); color: var(--vx-teal); font-size: 1.15rem; }
+    .path li:last-child .path__dot { background: var(--vx-grad); color: #00121f; box-shadow: 0 0 24px rgba(20,248,90,.35); }
+    .path h3 { font-size: .98rem; margin: .2rem 0 .15rem; }
+    .path p { font-size: .82rem; margin: 0; color: var(--vx-muted); line-height: 1.45; }
+    .path__step { font-size: .68rem; letter-spacing: .14em; color: var(--vx-dim); font-weight: 700; }
+
+    /* ---------- OPTION C: Photo frame ---------- */
+    .photo-card { padding: .7rem; }
+    .photo-card__img { position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 4 / 4.2; }
+    .photo-card__img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); animation: vx-kenburns 18s ease-in-out infinite alternate; }
+    .photo-card__img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(1,14,31,.92) 100%); }
+    .photo-card__cap { position: absolute; left: 1.3rem; right: 1.3rem; bottom: 1.2rem; z-index: 1; }
+    .photo-card__cap h2 { font-size: 1.3rem; margin: .4rem 0 .9rem; }
+    .photo-card__cap .hv-tags { margin-top: 0; }
+
+    /* shared: keep chips clear of card headings (fixes the overlap in the current hero) */
+    .mk-opt .float-chip--a { top: -26px; left: -28px; }
+  </style>
+</head>
+<body class="is-ready">
+  <div class="mk-switch" role="tablist" aria-label="Hero visual options">
+    <button class="on" data-opt="a">A · Segment orbit</button>
+    <button data-opt="b">B · Learning path</button>
+    <button data-opt="c">C · Photo frame</button>
+  </div>
+
+  <section class="hero">
+    <div class="hero__bg"><img src="assets/images/hero-markets.webp" alt="" width="1240" height="401"></div>
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <span class="hero__badge"><span class="dot"></span>India’s Emerging Trading &amp; Investment Platform</span>
+          <h1 class="hero__title">
+            <span class="line">Knowledge.</span>
+            <span class="line">Transparency.</span>
+            <span class="line text-grad">Responsible Participation.</span>
+          </h1>
+          <p class="hero__lead">VectorX helps people understand market structures, explore different financial segments, recognise risks, and make more informed decisions through accessible information and structured learning.</p>
+          <div class="hero__actions">
+            <a class="btn-vx btn-pulse" href="#">Explore Our Focus <i class="bi bi-arrow-right"></i></a>
+            <a class="btn-vx-ghost" href="#">About VectorX</a>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <!-- ===== OPTION A: Segment orbit ===== -->
+          <div class="mk-opt on" data-opt="a">
+            <div class="orbit hero-visual" aria-label="Market segments VectorX covers">
+              <div class="orbit__ring" style="--in:0"></div>
+              <div class="orbit__ring orbit__ring--dash" style="--in:12%"></div>
+              <div class="orbit__ring" style="--in:24%"></div>
+              <div class="orbit__glow"></div>
+              <div class="orbit__core"><img src="assets/images/logo-emblem.webp" alt="VectorX" width="253" height="229"></div>
+              <div class="orbit__spin">
+                <div class="orbit__node" style="--a:0deg"><span><i class="bi bi-currency-exchange"></i>Forex</span></div>
+                <div class="orbit__node" style="--a:60deg"><span><i class="bi bi-graph-up-arrow"></i>Stocks</span></div>
+                <div class="orbit__node" style="--a:120deg"><span><i class="bi bi-sliders2"></i>F&amp;O</span></div>
+                <div class="orbit__node" style="--a:180deg"><span><i class="bi bi-gem"></i>Commodities</span></div>
+                <div class="orbit__node" style="--a:240deg"><span><i class="bi bi-currency-bitcoin"></i>Digital Assets</span></div>
+                <div class="orbit__node" style="--a:300deg"><span><i class="bi bi-buildings"></i>Unlisted</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== OPTION B: Learning pathway ===== -->
+          <div class="mk-opt" data-opt="b">
+            <div class="hero-visual">
+              <div class="glass-card path-card">
+                <div class="hv-head">
+                  <div class="d-flex align-items-center gap-3">
+                    <img src="assets/images/logo-emblem.webp" alt="" width="253" height="229">
+                    <div><h2>Your Growth Pathway</h2><small>Dynamic · Structured · Responsible</small></div>
+                  </div>
+                  <span class="hv-live">LEARN</span>
+                </div>
+                <ol class="path">
+                  <li style="--i:0"><span class="path__dot"><i class="bi bi-book"></i></span><div><span class="path__step">STEP 01</span><h3>Learn the basics</h3><p>Market structures, instruments and how segments work.</p></div></li>
+                  <li style="--i:1"><span class="path__dot"><i class="bi bi-diagram-3"></i></span><div><span class="path__step">STEP 02</span><h3>Understand segments</h3><p>Forex, stocks, F&amp;O, commodities and digital assets.</p></div></li>
+                  <li style="--i:2"><span class="path__dot"><i class="bi bi-activity"></i></span><div><span class="path__step">STEP 03</span><h3>Recognise risk</h3><p>Volatility, leverage and capital protection.</p></div></li>
+                  <li style="--i:3"><span class="path__dot"><i class="bi bi-check2-circle"></i></span><div><span class="path__step">STEP 04</span><h3>Decide responsibly</h3><p>Informed choices with transparency at every step.</p></div></li>
+                </ol>
+              </div>
+              <div class="float-chip float-chip--b"><i class="bi bi-shield-lock"></i>Risk awareness first</div>
+            </div>
+          </div>
+
+          <!-- ===== OPTION C: Photo frame ===== -->
+          <div class="mk-opt" data-opt="c">
+            <div class="hero-visual">
+              <div class="glass-card photo-card">
+                <div class="photo-card__img">
+                  <img src="assets/images/bull-strength.webp" alt="Glowing bull representing market strength" width="530" height="435">
+                  <div class="photo-card__cap">
+                    <span class="hv-live">MARKET AWARENESS</span>
+                    <h2>Learn · Understand · Decide</h2>
+                    <div class="hv-tags">
+                      <div class="hv-tag"><i class="bi bi-book"></i>Structured learning</div>
+                      <div class="hv-tag"><i class="bi bi-activity"></i>Volatility &amp; risk</div>
+                      <div class="hv-tag"><i class="bi bi-people"></i>Community</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="float-chip float-chip--a"><i class="bi bi-lightbulb"></i>Informed decisions</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.mk-switch button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.dataset.opt;
+        document.querySelectorAll('.mk-switch button, .mk-opt').forEach(function (el) {
+          el.classList.toggle('on', el.dataset.opt === k);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
