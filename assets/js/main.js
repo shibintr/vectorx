@@ -54,7 +54,23 @@ const SITE_CONFIG = {
       }
       document.body.classList.remove("is-loading");
       document.body.classList.add("is-ready");
+      scrollToHash();
     }, wait);
+  }
+
+  /* ---------- Deep links (e.g. about.html#service-3 from the Home service cards) ----------
+     The body is scroll-locked while the loader shows, and late-loading images/fonts can
+     shift the layout, so re-align to the hash target once the page is ready. The fixed
+     header offset comes from CSS html { scroll-padding-top }. */
+  function scrollToHash() {
+    let id = "";
+    try { id = decodeURIComponent(window.location.hash.slice(1)); } catch (e) { return; }
+    const target = id && document.getElementById(id);
+    if (!target) return;
+    $$("[data-reveal]", target).forEach((el) => el.classList.add("is-revealed"));
+    window.requestAnimationFrame(() =>
+      target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" })
+    );
   }
 
   if (document.readyState === "complete") hideLoader();
