@@ -485,6 +485,41 @@ body.is-ready .anim-in { animation: vx-rise 1s var(--vx-ease) forwards; animatio
 }
 .page-hero__media { aspect-ratio: 5 / 4; max-width: 520px; margin-left: auto; }
 .page-hero__media::before { content: ""; position: absolute; inset: auto -30% -40% auto; width: 80%; height: 80%; z-index: -1; background: radial-gradient(circle, rgba(20, 248, 90, 0.35), transparent 70%); filter: blur(30px); }
+
+/* Split hero: the right side is a full-cover, softly blurred image (Contact, About) */
+.page-hero__backdrop {
+  position: absolute; inset: 0 0 0 auto; width: 50%; z-index: -2;
+  overflow: hidden; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 30%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 30%);
+}
+.page-hero__backdrop-img { /* the blurred layer; oversized so blur never shows soft edges */
+  position: absolute; inset: -24px;
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  filter: blur(5px) saturate(1.1); transform: scale(1.04);
+  animation: vx-kenburns 26s ease-in-out infinite alternate;
+}
+.page-hero__backdrop::after { /* blend + readability overlay, same tones as the Home hero */
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(1, 14, 31, 0.75) 0%, rgba(1, 14, 31, 0.3) 40%, rgba(1, 14, 31, 0.15) 100%),
+    linear-gradient(0deg, var(--vx-bg) 0%, transparent 30%),
+    linear-gradient(180deg, rgba(1, 14, 31, 0.5) 0%, transparent 25%);
+}
+.page-hero__spacer { aspect-ratio: 5 / 4; max-width: 520px; margin-left: auto; }
+@media (min-width: 992px) {
+  /* nudge the subject slightly left; stays within the layer's existing overflow so no edge shows */
+  .page-hero__backdrop-img { translate: -2.25vw 0; }
+}
+@media (max-width: 991.98px) {
+  /* columns stack: image sits behind the whole hero, darker so the text stays readable */
+  .page-hero__backdrop { width: 100%; -webkit-mask-image: none; mask-image: none; }
+  .page-hero__backdrop::after {
+    background: linear-gradient(180deg, rgba(1, 14, 31, 0.72) 0%, rgba(1, 14, 31, 0.8) 60%, var(--vx-bg) 100%);
+  }
+  .page-hero__spacer { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .page-hero__backdrop-img { animation: none; } }
 .vx-breadcrumb { --bs-breadcrumb-divider-color: var(--vx-dim); --bs-breadcrumb-item-active-color: var(--vx-green); font-size: 0.88rem; font-weight: 600; margin-bottom: 1.4rem; }
 .vx-breadcrumb a { color: var(--vx-muted); }
 .vx-breadcrumb a:hover { color: #fff; }
